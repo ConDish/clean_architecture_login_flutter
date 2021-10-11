@@ -7,6 +7,11 @@ import 'core/http/connection.dart';
 final sl = GetIt.instance;
 
 Future<void> init() async {
-  await AppConstants.initialize();
-  sl.registerLazySingleton<Dio>(() => getHttpClient(AppConstants.getAPI()));
+  final appConstants = AppConstantsFromEnv();
+  await appConstants.initialize();
+  sl.registerLazySingleton<AppConstants>(() => appConstants);
+
+  sl.registerLazySingleton<Dio>(
+    () => getHttpClient(sl.get<AppConstants>().getAPI),
+  );
 }

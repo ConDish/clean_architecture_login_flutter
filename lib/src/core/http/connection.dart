@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-Dio getHttpClient(baseApiUrl) {
+Dio getHttpClient(String baseApiUrl) {
   Dio dio = Dio(BaseOptions(
     baseUrl: baseApiUrl,
   ));
